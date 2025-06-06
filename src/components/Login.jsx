@@ -15,6 +15,7 @@ export default function Login() {
 
         try {
             const response = await api.post('/login', { email, password });
+            // En tu backend Laravel/JWTAuth el login devuelve: { access_token: "...", ... }
             const { token } = response.data;
             localStorage.setItem('token', token);
             navigate('/productos');

@@ -12,7 +12,7 @@ export default function ProductosLista() {
         setError('');
         try {
             const response = await api.get('/productos');
-            setProductos(response.data);
+            setProductos(Array.isArray(response.data) ? response.data : []);
         } catch (err) {
             if (err.response && err.response.status === 401) {
                 navigate('/login');

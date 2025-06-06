@@ -36,12 +36,17 @@ export default function ProductoForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
-
-        const payload = { nombre, descripcion, precio, stock };
-
+    
+        // Convertimos los campos numéricos correctamente
+        const payload = {
+            nombre,
+            descripcion,
+            precio: parseFloat(precio),
+            stock: parseInt(stock),
+        };
+    
         try {
             if (esEdicion) {
-                // Para PATCH parcial, solo enviar campos no vacíos
                 await api.put(`/productos/${id}`, payload);
             } else {
                 await api.post('/productos', payload);
@@ -61,6 +66,7 @@ export default function ProductoForm() {
             }
         }
     };
+    
 
     return (
         <div className="container">
